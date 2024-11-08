@@ -1,0 +1,101 @@
+/* Global styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #121212;
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+.container {
+    text-align: center;
+    width: 90%;
+    max-width: 600px;
+}
+
+h1 {
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+}
+
+/* Movie form */
+.movie-form {
+    margin-bottom: 20px;
+}
+
+.movie-form input {
+    padding: 10px;
+    width: 300px;
+    font-size: 1rem;
+    border: none;
+    border-radius: 5px;
+    background-color: #333;
+    color: #fff;
+}
+
+.movie-form button {
+    padding: 10px 20px;
+    background-color: #007BFF;
+    border: none;
+    border-radius: 5px;
+    color: #fff;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.movie-form button:hover {
+    background-color: #0056b3;
+}
+
+/* Movie list */
+.movie-list {
+    margin-top: 20px;
+}
+
+.movie-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px;
+    background-color: #333;
+    margin-bottom: 10px;
+    border-radius: 5px;
+}
+
+.movie-item .movie-name {
+    font-size: 1.2rem;
+}
+
+.movie-item button {
+    background-color: #dc3545;
+    border: none;
+    color: white;
+    padding: 5px 10px;
+    font-size: 1rem;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.movie-item button:hover {
+    background-color: #c82333;
+}
+
+.movie-item .edit-button {
+    background-color: #28a745;
+    margin-right: 10px;
+}
+
+.movie-item .edit-button:hover {
+    background-color: #218838;
+}
