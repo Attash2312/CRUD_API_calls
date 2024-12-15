@@ -1,22 +1,26 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Movie Watchlist</title>
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Movie Watchlist</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="container">
-        <h1>Movie Watchlist</h1>
-        <div class="movie-form">
-            <input type="text" id="movie-name" placeholder="Enter movie name">
-            <button id="submit-btn">Add Movie</button>
-        </div>
-        
-        <div id="movie-list" class="movie-list"></div>
-    </div>
+  <h1>Movie Watchlist</h1>
 
-    <script src="script.js"></script>
+  <!-- Input Form -->
+  <form id="movieForm">
+    <input type="text" id="name" placeholder="Movie Name" required>
+    <input type="text" id="genre" placeholder="Genre" required>
+    <input type="number" id="year" placeholder="Year" required>
+    <button type="button" onclick="saveMovie()">Save Movie</button>
+  </form>
+
+  <!-- Movie List -->
+  <h2>Your Movies</h2>
+  <div id="movieList"></div>
+
+  <script src="script.js"></script>
 </body>
 </html>

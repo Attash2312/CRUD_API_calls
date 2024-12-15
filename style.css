@@ -1,101 +1,62 @@
-/* Global styles */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
 body {
-    font-family: 'Arial', sans-serif;
-    background-color: #121212;
-    color: #fff;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    margin: 0;
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 20px;
+  background-color: #121212; /* Dark background */
+  color: #e0e0e0; /* Light gray text */
 }
 
-.container {
-    text-align: center;
-    width: 90%;
-    max-width: 600px;
+h1, h2 {
+  text-align: center;
+  color: #ffffff; /* White text */
 }
 
-h1 {
-    font-size: 2.5rem;
-    margin-bottom: 20px;
+form {
+  display: flex;
+  flex-direction: column;
+  max-width: 400px;
+  margin: 0 auto;
+  background-color: #1e1e1e; /* Dark form background */
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.5);
 }
 
-/* Movie form */
-.movie-form {
-    margin-bottom: 20px;
+input, button {
+  margin: 5px 0;
+  padding: 10px;
+  font-size: 16px;
+  background-color: #333333; /* Darker input background */
+  color: #ffffff; /* White input text */
+  border: 1px solid #444444;
+  border-radius: 4px;
 }
 
-.movie-form input {
-    padding: 10px;
-    width: 300px;
-    font-size: 1rem;
-    border: none;
-    border-radius: 5px;
-    background-color: #333;
-    color: #fff;
+button {
+  background-color: #007bff; /* Bright blue for buttons */
+  color: white;
+  cursor: pointer;
 }
 
-.movie-form button {
-    padding: 10px 20px;
-    background-color: #007BFF;
-    border: none;
-    border-radius: 5px;
-    color: #fff;
-    font-size: 1rem;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
+button:hover {
+  background-color: #0056b3;
 }
 
-.movie-form button:hover {
-    background-color: #0056b3;
+#movieList {
+  margin-top: 20px;
+  max-width: 600px;
+  margin: 0 auto;
 }
 
-/* Movie list */
-.movie-list {
-    margin-top: 20px;
+#movieList div {
+  padding: 10px;
+  border: 1px solid #444444;
+  margin-bottom: 10px;
+  background-color: #1e1e1e; /* Dark card background */
+  border-radius: 4px;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.5);
 }
 
-.movie-item {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 15px;
-    background-color: #333;
-    margin-bottom: 10px;
-    border-radius: 5px;
-}
-
-.movie-item .movie-name {
-    font-size: 1.2rem;
-}
-
-.movie-item button {
-    background-color: #dc3545;
-    border: none;
-    color: white;
-    padding: 5px 10px;
-    font-size: 1rem;
-    cursor: pointer;
-    border-radius: 5px;
-    transition: background-color 0.3s ease;
-}
-
-.movie-item button:hover {
-    background-color: #c82333;
-}
-
-.movie-item .edit-button {
-    background-color: #28a745;
-    margin-right: 10px;
-}
-
-.movie-item .edit-button:hover {
-    background-color: #218838;
+#movieList h3 {
+  color: #ffffff; /* White headings */
 }

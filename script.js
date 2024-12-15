@@ -1,81 +1,91 @@
-const apiUrl = 'https://672de049fd89797156441457.mockapi.io/api/movie';
-const movieNameInput = document.getElementById('movie-name');
-const submitButton = document.getElementById('submit-btn');
-const movieListContainer = document.getElementById('movie-list');
-let editingMovieId = null;
+const apiBase = 'http://localhost:5000/api/movies';
 
-// Function to fetch and render the movie list
+let editingMovieId = null; // To track if editing a movie
+
+// Fetch and display movies
 async function fetchMovies() {
-    const response = await fetch(apiUrl);
+  try {
+    const response = await fetch(apiBase);
     const movies = await response.json();
-    renderMovieList(movies);
+    displayMovies(movies);
+  } catch (error) {
+    alert('Failed to fetch movies');
+  }
 }
 
-// Function to render the movie list to the DOM
-function renderMovieList(movies) {
-    movieListContainer.innerHTML = '';
-    movies.forEach(movie => {
-        const movieItem = document.createElement('div');
-        movieItem.classList.add('movie-item');
-        movieItem.innerHTML = `
-            <span class="movie-name">${movie.name}</span>
-            <div>
-                <button class="edit-button" onclick="startEditMovie(${movie.id})">Edit</button>
-                <button onclick="deleteMovie(${movie.id})">Delete</button>
-            </div>
-        `;
-        movieListContainer.appendChild(movieItem);
-    });
+// Display movies below the input form
+function displayMovies(movies) {
+  const movieList = document.getElementById('movieList');
+  movieList.innerHTML = '';
+  movies.forEach((movie) => {
+    movieList.innerHTML += `
+      <div>
+        <h3>${movie.name} (${movie.year}) - ${movie.genre}</h3>
+        <button onclick="populateEditForm('${movie._id}', '${movie.name}', '${movie.genre}', '${movie.year}')">Edit</button>
+        <button onclick="deleteMovie('${movie._id}')">Delete</button>
+      </div>
+    `;
+  });
 }
 
-// Function to add or update a movie
-async function addOrUpdateMovie() {
-    const movieName = movieNameInput.value.trim();
+// Populate input fields for editing
+function populateEditForm(id, name, genre, year) {
+  document.getElementById('name').value = name;
+  document.getElementById('genre').value = genre;
+  document.getElementById('year').value = year;
+  editingMovieId = id; // Set the movie ID being edited
+}
 
-    if (!movieName) return;
+// Add or update a movie
+async function saveMovie() {
+  const name = document.getElementById('name').value;
+  const genre = document.getElementById('genre').value;
+  const year = document.getElementById('year').value;
 
-    const movieData = { name: movieName };
+  if (!name || !genre || !year) {
+    alert('Please fill in all fields');
+    return;
+  }
 
+  try {
     if (editingMovieId) {
-        // Update the movie
-        await fetch(`${apiUrl}/${editingMovieId}`, {
-            method: 'PUT',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(movieData)
-        });
-        editingMovieId = null;
-        submitButton.textContent = 'Add Movie';
+      // Update movie
+      const response = await fetch(`${apiBase}/${editingMovieId}`, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ name, genre, year }),
+      });
+      const result = await response.json();
+      alert(result.message);
+      editingMovieId = null; // Reset after editing
     } else {
-        // Add a new movie
-        await fetch(apiUrl, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(movieData)
-        });
+      // Add new movie
+      const response = await fetch(apiBase, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ name, genre, year }),
+      });
+      const result = await response.json();
+      alert(result.message);
     }
-
-    movieNameInput.value = ''; // Clear input field
-    fetchMovies(); // Refresh the movie list
+    document.getElementById('movieForm').reset();
+    fetchMovies();
+  } catch (error) {
+    alert('Failed to save movie');
+  }
 }
 
-// Function to delete a movie
+// Delete a movie
 async function deleteMovie(id) {
-    await fetch(`${apiUrl}/${id}`, {
-        method: 'DELETE'
-    });
-    fetchMovies(); // Refresh the movie list
+  try {
+    const response = await fetch(`${apiBase}/${id}`, { method: 'DELETE' });
+    const result = await response.json();
+    alert(result.message);
+    fetchMovies();
+  } catch (error) {
+    alert('Failed to delete movie');
+  }
 }
 
-// Function to start editing a movie
-function startEditMovie(id) {
-    editingMovieId = id;
-    const movieName = document.querySelector(`.movie-item:nth-child(${id}) .movie-name`).textContent;
-    movieNameInput.value = movieName;
-    submitButton.textContent = 'Update Movie';
-}
-
-// Add event listener to submit button
-submitButton.addEventListener('click', addOrUpdateMovie);
-
-// Fetch and render movies when the page loads
-document.addEventListener('DOMContentLoaded', fetchMovies);
+// Fetch movies on page load
+fetchMovies();
