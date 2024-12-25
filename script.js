@@ -1,4 +1,4 @@
-const apiBase = 'http://localhost:5000/api/movies';
+const apiBase = 'http://localhost:5000/movies';
 
 let editingMovieId = null; // To track if editing a movie
 
